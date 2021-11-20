@@ -23,6 +23,34 @@ async def index(request):
     return aiohttp.web.Response(body=body, content_type="text/html")
 
 
+async def setup_xhr_open_intercept(driver) -> None:
+    """
+    Setup capture of urls being used in ajax requests.
+    """
+    raise NotImplementedError
+
+
+async def read_captured_xhr_urls(driver) -> list:
+    raise NotImplementedError
+
+
+async def setup_xhr_url_capture(driver) -> None:
+    """
+    Called once to prepare the logic that will be capturing data.
+    Specifying which urls require capture is done by using
+    extend_xhr_url_capture.
+    """
+    raise NotImplementedError
+
+
+async def extend_xhr_url_capture(driver, name, url) -> None:
+    raise NotImplementedError
+
+
+async def read_captured_xhr_data(driver, name) -> dict:
+    raise NotImplementedError
+
+
 def make_application(driver):
     application = aiohttp.web.Application()
     application.add_routes(
